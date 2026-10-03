@@ -3,408 +3,392 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#080b16">
-<title>MAX — Your club's digital teammate</title>
-<meta name="description" content="MAX macht aus jedem Spiel Content, Reichweite und Sponsoring-Umsatz. Für Sportvereine und lokale Marken.">
+<meta name="theme-color" content="#080A10">
+<title>MAX — Dein digitaler Teammate</title>
+<meta name="description" content="MAX automatisiert Content, digitale Sponsoring-Flächen und Reichweite für Sportvereine.">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
 :root{
-  --bg:#070915;
-  --bg2:#0c1020;
-  --ink:#f7f8ff;
-  --muted:#a9b0c7;
+  --bg:#080A10;
+  --panel:#0E111A;
+  --panel2:#111521;
+  --text:#F4F7FB;
+  --muted:#8C95A8;
   --line:rgba(255,255,255,.09);
-  --purple:#8b5cf6;
-  --violet:#c65cff;
-  --blue:#3987ff;
-  --cyan:#3de1ff;
-  --mint:#59f5c6;
-  --lime:#b7ff5a;
-  --card:rgba(18,22,41,.72);
+  --mint:#78F3D0;
+  --blue:#6BB7FF;
+  --violet:#9A7BFF;
+  --pink:#DF74FF;
 }
+
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
   margin:0;
-  color:var(--ink);
-  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  background:
-    radial-gradient(circle at 12% 8%,rgba(125,76,255,.22),transparent 28%),
-    radial-gradient(circle at 88% 20%,rgba(61,225,255,.14),transparent 27%),
-    radial-gradient(circle at 55% 70%,rgba(89,245,198,.08),transparent 30%),
-    var(--bg);
+  color:var(--text);
+  background:var(--bg);
+  font-family:Manrope,system-ui,sans-serif;
   overflow-x:hidden;
 }
 a{color:inherit;text-decoration:none}
 button{font:inherit}
-.noise{
-  position:fixed;inset:0;pointer-events:none;opacity:.035;z-index:2;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.9'/%3E%3C/svg%3E");
-}
-.nav{
-  position:sticky;top:0;z-index:40;
-  display:flex;align-items:center;justify-content:space-between;
-  width:min(1220px,94vw);margin:0 auto;
-  padding:18px 0;
-  backdrop-filter:blur(16px);
-}
-.nav:before{
-  content:"";position:fixed;top:0;left:0;right:0;height:76px;
-  background:linear-gradient(180deg,rgba(7,9,21,.82),rgba(7,9,21,.35),transparent);
-  z-index:-1;pointer-events:none;
-}
-.logo{
-  font-size:30px;font-weight:950;letter-spacing:-.08em;
-  background:linear-gradient(110deg,#fff 5%,#aef8ff 35%,#ad87ff 68%,#6ff4c2);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-}
-.navlinks{display:flex;align-items:center;gap:28px;color:#cbd0e3;font-size:13px;font-weight:700}
-.navlinks a:hover{color:#fff}
-.navcta{
-  padding:11px 16px;border:1px solid rgba(255,255,255,.15);border-radius:999px;
-  background:rgba(255,255,255,.06);box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
-}
-.shell{width:min(1220px,92vw);margin:auto}
-.hero{
-  min-height:790px;
-  display:grid;grid-template-columns:1.08fr .92fr;gap:45px;align-items:center;
-  padding:66px 0 92px;
-}
-.badge{
-  display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;
-  border:1px solid rgba(111,244,194,.25);
-  background:rgba(89,245,198,.07);color:#a9ffe5;
-  font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
-}
-.badge .pulse{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 18px var(--mint)}
-h1{
-  font-size:clamp(68px,8vw,116px);line-height:.83;letter-spacing:-.085em;
-  margin:26px 0 24px;font-weight:950;
-}
-.gradient-text{
-  background:linear-gradient(95deg,#fff 0%,#9feeff 22%,#9f7cff 56%,#ff78db 76%,#6ff5c8 100%);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-}
-.hero p{
-  max-width:680px;font-size:19px;line-height:1.65;color:#b8bfd5;margin:0;
-}
-.hero-actions{display:flex;gap:12px;margin-top:34px;flex-wrap:wrap}
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:9px;
-  border-radius:14px;padding:15px 20px;font-weight:800;font-size:13px;
-  transition:.2s transform,.2s box-shadow,.2s border-color;
-}
-.btn:hover{transform:translateY(-2px)}
-.btn-primary{
-  color:#071019;
-  background:linear-gradient(105deg,#71f5d0,#75e5ff 48%,#b085ff);
-  box-shadow:0 14px 44px rgba(85,239,200,.2),0 8px 36px rgba(139,92,246,.2);
-}
-.btn-secondary{border:1px solid var(--line);background:rgba(255,255,255,.05)}
-.hero-note{font-size:11px;color:#7f879e;margin-top:14px}
-.visual{
-  position:relative;height:600px;display:flex;align-items:center;justify-content:center;
-}
-.orb{
-  position:absolute;width:460px;height:460px;border-radius:50%;
-  background:conic-gradient(from 210deg,#4af3c2,#31b7ff,#8156ff,#fd63cc,#4af3c2);
-  filter:blur(2px);opacity:.85;animation:float 7s ease-in-out infinite;
-  box-shadow:0 0 90px rgba(113,245,208,.14),0 0 130px rgba(139,92,246,.18);
-}
-.orb:after{
-  content:"";position:absolute;inset:3px;border-radius:50%;
-  background:radial-gradient(circle at 32% 28%,#171d39,#0a0d1d 55%,#070914 80%);
-}
-.ring{
-  position:absolute;width:525px;height:525px;border-radius:50%;
-  border:1px solid rgba(255,255,255,.1);animation:spin 18s linear infinite;
-}
-.ring:before,.ring:after{content:"";position:absolute;width:8px;height:8px;border-radius:50%;background:var(--mint);box-shadow:0 0 20px var(--mint)}
-.ring:before{top:58px;left:63px}.ring:after{bottom:77px;right:42px;background:#a17cff;box-shadow:0 0 20px #a17cff}
-.agent{
-  position:relative;z-index:3;width:315px;border-radius:28px;padding:24px;
-  background:linear-gradient(180deg,rgba(25,31,56,.94),rgba(10,13,27,.92));
-  border:1px solid rgba(255,255,255,.12);
-  box-shadow:0 32px 100px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.08);
-  backdrop-filter:blur(20px);
-}
-.agent-head{display:flex;align-items:center;gap:12px;margin-bottom:22px}
-.max-avatar{
-  width:44px;height:44px;border-radius:14px;display:grid;place-items:center;
-  color:#071019;font-weight:950;font-size:14px;
-  background:linear-gradient(135deg,#6ff5c8,#68dfff 48%,#ad7dff);
-  box-shadow:0 0 28px rgba(89,245,198,.24);
-}
-.agent-head b{display:block}.agent-head span{font-size:10px;color:#7f879e}
-.status{margin-left:auto;width:8px;height:8px;border-radius:50%;background:#62f1bd;box-shadow:0 0 14px #62f1bd}
-.task{
-  display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;
-  padding:11px 0;border-top:1px solid rgba(255,255,255,.07);
-}
-.task-icon{
-  width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-size:12px;
-  background:rgba(255,255,255,.06)
-}
-.task b{font-size:11px;display:block}.task small{font-size:9px;color:#7f879e}
-.done{font-size:9px;color:#6ff5c8;font-weight:800}
-.revenue{
-  margin-top:14px;padding:15px;border-radius:15px;
-  background:linear-gradient(125deg,rgba(82,245,193,.12),rgba(102,133,255,.09),rgba(187,100,255,.11));
-  border:1px solid rgba(110,246,207,.15);
-}
-.revenue small{font-size:9px;color:#8f9ab4;display:block}.revenue strong{font-size:27px;letter-spacing:-.04em;display:block;margin-top:3px}
-.float-card{
-  position:absolute;z-index:5;padding:12px 14px;border-radius:14px;
-  background:rgba(17,22,41,.78);border:1px solid rgba(255,255,255,.11);backdrop-filter:blur(14px);
-  box-shadow:0 20px 50px rgba(0,0,0,.3);font-size:10px;color:#aeb6cb;
-}
-.float-card b{display:block;color:#fff;font-size:13px;margin-bottom:3px}
-.fc1{top:80px;right:-15px;animation:float2 5s ease-in-out infinite}
-.fc2{bottom:75px;left:-20px;animation:float2 6.4s ease-in-out infinite reverse}
+::selection{background:var(--mint);color:#07100d}
 
-.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;background:rgba(255,255,255,.02)}
-.marquee-track{display:flex;gap:56px;width:max-content;padding:16px 0;animation:marquee 25s linear infinite;color:#717b99;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
-.marquee-track span:nth-child(3n+1){color:#87efd2}.marquee-track span:nth-child(3n+2){color:#9db9ff}.marquee-track span:nth-child(3n){color:#c59cff}
-
-.section{padding:108px 0}
-.eyebrow{font-size:11px;font-weight:850;letter-spacing:.14em;text-transform:uppercase;color:#7ff0cf}
-.section h2{font-size:clamp(44px,5vw,72px);line-height:.94;letter-spacing:-.06em;margin:15px 0 18px;max-width:900px}
-.lead{font-size:17px;line-height:1.65;color:#a8b0c8;max-width:720px}
-.grid-5{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:40px}
-.value-card{
-  min-height:230px;padding:22px;border-radius:22px;position:relative;overflow:hidden;
-  border:1px solid var(--line);background:linear-gradient(180deg,rgba(20,26,48,.72),rgba(10,13,27,.78));
-  transition:.25s transform,.25s border-color,.25s box-shadow;
-}
-.value-card:hover{transform:translateY(-5px);border-color:rgba(129,104,255,.35);box-shadow:0 24px 55px rgba(0,0,0,.22)}
-.value-card:before{content:"";position:absolute;inset:auto -35px -70px auto;width:150px;height:150px;border-radius:50%;filter:blur(30px);opacity:.18;background:var(--accent,#8b5cf6)}
-.value-card .num{font-size:10px;color:#68718d;font-weight:800}
-.value-card h3{font-size:20px;line-height:1.05;letter-spacing:-.035em;margin:64px 0 9px}
-.value-card h3 span{color:var(--accent,#7ff0cf)}
-.value-card p{font-size:11px;color:#8e97af;line-height:1.55;margin:0}
-
-.split{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:46px}
-.big-card{
-  min-height:500px;padding:36px;border:1px solid var(--line);border-radius:30px;position:relative;overflow:hidden;
-  background:linear-gradient(145deg,rgba(18,25,47,.82),rgba(9,12,24,.86));
-}
-.big-card:before{content:"";position:absolute;width:380px;height:380px;border-radius:50%;filter:blur(70px);opacity:.16;right:-100px;top:-100px;background:var(--glow)}
-.big-card h3{font-size:34px;letter-spacing:-.05em;margin:10px 0}
-.big-card p{font-size:14px;color:#98a2ba;line-height:1.6;max-width:520px}
-.steps{display:grid;gap:10px;margin-top:34px}
-.step{display:grid;grid-template-columns:35px 1fr auto;gap:11px;align-items:center;padding:13px 0;border-top:1px solid rgba(255,255,255,.07)}
-.step i{font-style:normal;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.06);font-size:10px}
-.step b{font-size:12px}.step span{font-size:10px;color:#7ff0cf;font-weight:750}
-.brand-cloud{position:absolute;bottom:34px;left:36px;right:36px;display:flex;gap:7px;flex-wrap:wrap}
-.brand-cloud span{border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);padding:8px 10px;border-radius:999px;font-size:9px;color:#8993ad}
-
-.flow-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:40px}
-.flow-card{padding:24px;border-radius:22px;border:1px solid var(--line);background:rgba(255,255,255,.025);position:relative}
-.flow-card:after{content:"→";position:absolute;right:-13px;top:50%;font-size:16px;color:#55617d}
-.flow-card:last-child:after{display:none}
-.flow-icon{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;margin-bottom:28px;font-size:17px;background:linear-gradient(135deg,rgba(111,245,200,.15),rgba(139,92,246,.18))}
-.flow-card b{font-size:15px;display:block}.flow-card p{font-size:11px;line-height:1.55;color:#8791aa}
-
-.quote{
-  padding:72px;border-radius:34px;border:1px solid rgba(255,255,255,.1);
+.ambient{
+  position:fixed;inset:0;pointer-events:none;z-index:-2;
   background:
-    radial-gradient(circle at 15% 20%,rgba(96,241,204,.16),transparent 28%),
-    radial-gradient(circle at 85% 80%,rgba(167,91,255,.18),transparent 30%),
-    linear-gradient(140deg,#12182d,#0a0d1b);
-  text-align:center;position:relative;overflow:hidden;
+    radial-gradient(700px 500px at 85% 5%,rgba(154,123,255,.13),transparent 65%),
+    radial-gradient(620px 480px at 15% 32%,rgba(107,183,255,.09),transparent 68%),
+    radial-gradient(700px 520px at 70% 78%,rgba(120,243,208,.08),transparent 70%);
 }
-.quote h2{margin:0 auto 18px;max-width:850px}
-.quote p{margin:0 auto;max-width:620px;color:#a8b0c7;line-height:1.6}
-.quote .btn{margin-top:28px}
-.footer{padding:28px 0 45px;color:#727b96;font-size:11px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line)}
-.footer strong{font-size:22px;color:#fff;letter-spacing:-.06em}
-
-@keyframes float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-15px) rotate(2deg)}}
-@keyframes float2{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
-@keyframes spin{to{transform:rotate(360deg)}}
-@keyframes marquee{to{transform:translateX(-50%)}}
-
-@media(max-width:1050px){
-  .hero{grid-template-columns:1fr;min-height:auto;padding-top:70px}
-  .visual{height:570px}
-  .grid-5{grid-template-columns:repeat(2,1fr)}
-  .value-card:last-child{grid-column:1/-1}
+.grid{
+  position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.15;
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.8),transparent 78%);
 }
-@media(max-width:760px){
+
+.wrap{width:min(1180px,92vw);margin:auto}
+.nav{
+  height:78px;display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--line);
+}
+.wordmark{display:flex;align-items:center;gap:10px}
+.wordmark svg{width:84px;height:28px;display:block}
+.wordmark small{font-size:9px;letter-spacing:.15em;color:#697286;text-transform:uppercase}
+.navlinks{display:flex;align-items:center;gap:26px;color:#9DA6B8;font-size:12px;font-weight:600}
+.navlinks a:hover{color:#fff}
+.navcta{padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.035)}
+
+.hero{
+  min-height:760px;
+  display:grid;grid-template-columns:1.1fr .9fr;gap:70px;align-items:center;
+  padding:84px 0 92px;
+}
+.eyebrow{
+  display:flex;align-items:center;gap:10px;
+  font:600 11px/1 Space Grotesk,sans-serif;
+  letter-spacing:.14em;text-transform:uppercase;color:#A4ADBE;
+}
+.eyebrow:before{content:"";width:22px;height:1px;background:linear-gradient(90deg,var(--mint),var(--violet))}
+h1,h2,h3{font-family:Space Grotesk,sans-serif}
+h1{
+  margin:22px 0 24px;
+  font-size:clamp(64px,7vw,104px);
+  line-height:.92;letter-spacing:-.075em;font-weight:600;
+  max-width:760px;
+}
+.maximal{
+  background:linear-gradient(100deg,var(--mint),var(--blue) 35%,var(--violet) 67%,var(--pink));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero-copy p{
+  max-width:660px;margin:0;color:#A4ADBE;font-size:18px;line-height:1.75;
+}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:32px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:48px;padding:0 17px;border-radius:12px;font-size:12px;font-weight:700;
+  transition:.2s ease;
+}
+.btn:hover{transform:translateY(-1px)}
+.primary{background:#F7FAFC;color:#0A0D12}
+.secondary{border:1px solid var(--line);background:rgba(255,255,255,.035)}
+.sports{margin-top:18px;color:#636D81;font-size:10px;letter-spacing:.05em}
+
+.agent-wrap{position:relative;display:flex;justify-content:center}
+.agent-glow{
+  position:absolute;width:360px;height:360px;border-radius:50%;top:70px;
+  background:conic-gradient(from 210deg,var(--mint),var(--blue),var(--violet),var(--pink),var(--mint));
+  filter:blur(80px);opacity:.18;
+}
+.agent{
+  position:relative;width:min(410px,100%);padding:20px;border-radius:24px;
+  background:rgba(14,17,26,.82);border:1px solid rgba(255,255,255,.11);
+  backdrop-filter:blur(22px);box-shadow:0 32px 80px rgba(0,0,0,.35);
+}
+.agent-top{display:flex;align-items:center;padding:4px 2px 18px}
+.agent-dot{
+  width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+  font:700 10px Space Grotesk;color:#08100f;
+  background:linear-gradient(135deg,var(--mint),var(--blue),var(--violet));
+}
+.agent-title{margin-left:11px}
+.agent-title b{display:block;font:600 13px Space Grotesk}
+.agent-title span{font-size:9px;color:#747E92}
+.online{margin-left:auto;width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 12px var(--mint)}
+.agent-line{height:1px;background:var(--line);margin:0 -20px}
+.summary{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:end;padding:22px 0}
+.summary small{display:block;color:#6E788D;font-size:9px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
+.summary strong{font:600 34px Space Grotesk;letter-spacing:-.05em}
+.summary .delta{font-size:10px;color:var(--mint);padding:6px 8px;border:1px solid rgba(120,243,208,.18);background:rgba(120,243,208,.05);border-radius:8px}
+.tasks{display:grid;gap:8px}
+.task{
+  display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;
+  padding:13px 14px;border:1px solid rgba(255,255,255,.07);border-radius:12px;background:rgba(255,255,255,.018)
+}
+.task b{display:block;font-size:11px}.task span{display:block;font-size:9px;color:#6E788D;margin-top:3px}
+.task em{font-style:normal;font-size:9px;color:#9DA7BA}
+.agent-foot{padding-top:16px;margin-top:10px;border-top:1px solid var(--line);display:flex;justify-content:space-between;color:#697286;font-size:9px}
+
+.strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(255,255,255,.014)}
+.strip .wrap{display:grid;grid-template-columns:repeat(5,1fr)}
+.strip div{padding:18px 12px;border-right:1px solid var(--line);font:600 10px Space Grotesk;text-align:center;letter-spacing:.04em;color:#778195}
+.strip div:first-child{border-left:1px solid var(--line)}
+.strip b{color:#fff;font-weight:600}
+
+.section{padding:110px 0}
+.head{display:grid;grid-template-columns:.7fr 1.3fr;gap:40px;align-items:end;margin-bottom:42px}
+.head h2{margin:0;font-size:clamp(44px,5vw,68px);line-height:.98;letter-spacing:-.055em;font-weight:600}
+.head p{margin:0;color:#929CAF;line-height:1.7;font-size:14px;max-width:610px}
+
+.cards{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.card{
+  min-height:245px;padding:19px;border:1px solid var(--line);border-radius:18px;
+  background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,.012));
+  position:relative;overflow:hidden;
+}
+.card:after{
+  content:"";position:absolute;width:120px;height:120px;border-radius:50%;
+  right:-50px;bottom:-65px;background:var(--c,var(--violet));filter:blur(34px);opacity:.18;
+}
+.card .n{font:600 9px Space Grotesk;color:#5D6679}
+.card h3{font-size:18px;line-height:1.05;letter-spacing:-.035em;font-weight:600;margin:76px 0 10px}
+.card h3 span{color:var(--c,var(--mint))}
+.card p{margin:0;color:#7D879B;font-size:10px;line-height:1.55}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.panel{
+  min-height:510px;padding:30px;border:1px solid var(--line);border-radius:22px;
+  background:var(--panel);position:relative;overflow:hidden;
+}
+.panel:before{content:"";position:absolute;inset:auto -120px -160px auto;width:360px;height:360px;border-radius:50%;background:var(--glow);filter:blur(90px);opacity:.12}
+.panel h3{margin:12px 0 12px;font-size:32px;letter-spacing:-.05em;font-weight:600}
+.panel>p{color:#8E98AB;line-height:1.65;font-size:13px;max-width:500px}
+.list{display:grid;gap:0;margin-top:34px}
+.row{display:grid;grid-template-columns:30px 1fr auto;gap:12px;align-items:center;padding:14px 0;border-top:1px solid var(--line)}
+.row i{font-style:normal;color:#5F697D;font-size:9px}
+.row b{font-size:11px;font-weight:600}
+.row span{font-size:9px;color:#778195}
+.tags{display:flex;gap:6px;flex-wrap:wrap;position:absolute;left:30px;right:30px;bottom:28px}
+.tags span{border:1px solid var(--line);border-radius:999px;padding:7px 9px;font-size:8px;color:#737D90}
+
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.flowbox{border-top:1px solid var(--line);padding:22px 0 0;position:relative}
+.flowbox:not(:last-child):after{content:"";position:absolute;top:-1px;right:0;width:34px;height:1px;background:linear-gradient(90deg,var(--blue),var(--violet))}
+.flowbox .num{font:600 9px Space Grotesk;color:#606A7E;margin-bottom:46px}
+.flowbox h3{font-size:18px;margin:0 0 8px;font-weight:600;letter-spacing:-.03em}
+.flowbox p{font-size:10px;line-height:1.6;color:#788295;margin:0;max-width:230px}
+
+.cta{
+  margin:10px 0 100px;border:1px solid var(--line);border-radius:26px;padding:74px 28px;text-align:center;
+  background:
+    radial-gradient(500px 240px at 50% 10%,rgba(154,123,255,.14),transparent 70%),
+    rgba(255,255,255,.018);
+}
+.cta h2{font-size:clamp(48px,6vw,80px);letter-spacing:-.06em;line-height:.95;margin:12px auto 18px;font-weight:600;max-width:900px}
+.cta p{color:#929CAF;max-width:650px;margin:0 auto;line-height:1.65;font-size:14px}
+.cta .actions{justify-content:center}
+
+footer{height:90px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;color:#606A7E;font-size:10px}
+.footer-logo{font:600 18px Space Grotesk;color:#fff;letter-spacing:-.05em}
+
+@media(max-width:980px){
+  .hero{grid-template-columns:1fr;gap:50px;padding-top:65px}
+  .agent-wrap{justify-content:flex-start}
+  .strip .wrap{grid-template-columns:repeat(2,1fr)}
+  .strip div:last-child{grid-column:1/-1}
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .card:last-child{grid-column:1/-1}
+  .head{grid-template-columns:1fr}
+}
+@media(max-width:720px){
   .navlinks a:not(.navcta){display:none}
-  .hero{padding-top:36px}
-  h1{font-size:68px}
-  .visual{height:500px;transform:scale(.88)}
-  .orb{width:390px;height:390px}.ring{width:450px;height:450px}
-  .grid-5,.split,.flow-grid{grid-template-columns:1fr}
-  .value-card:last-child{grid-column:auto}
-  .flow-card:after{display:none}
-  .section{padding:76px 0}
-  .quote{padding:48px 24px}
-  .big-card{min-height:460px}
-}
-@media(max-width:470px){
-  .shell{width:90vw}
-  h1{font-size:58px}
-  .hero p{font-size:16px}
-  .visual{margin:0 -35px;transform:scale(.75);height:440px}
-  .section h2{font-size:43px}
-  .footer{display:block}.footer span{display:block;margin-top:8px}
+  .hero{padding-top:45px;min-height:auto}
+  h1{font-size:64px}
+  .hero-copy p{font-size:16px}
+  .cards,.two,.flow{grid-template-columns:1fr}
+  .card:last-child{grid-column:auto}
+  .strip .wrap{grid-template-columns:1fr}
+  .strip div{border-left:1px solid var(--line)}
+  .section{padding:80px 0}
+  .panel{min-height:470px}
+  .cta{padding:55px 20px}
+  footer{height:auto;padding:26px 0;display:block}
+  footer span{display:block;margin-top:8px}
 }
 </style>
 </head>
+
 <body>
-<div class="noise"></div>
+<div class="ambient"></div>
+<div class="grid"></div>
 
-<nav class="nav">
-  <a class="logo" href="#">MAX</a>
-  <div class="navlinks">
-    <a href="#clubs">For Clubs</a>
-    <a href="#brands">For Brands</a>
-    <a href="#how">How MAX works</a>
-    <a class="navcta" href="#start">Meet MAX ↗</a>
-  </div>
-</nav>
-
-<main>
-<section class="shell hero">
-  <div>
-    <div class="badge"><span class="pulse"></span> Your club's digital teammate</div>
-    <h1><span class="gradient-text">MAX</span><br>your club.</h1>
-    <p>MAX macht aus jedem Spiel mehr: mehr Content, mehr Reichweite und mehr Sponsoring-Umsatz — automatisch. Für Vereine jeder Sportart mit Liga- und Spielbetrieb.</p>
-    <div class="hero-actions">
-      <a class="btn btn-primary" href="#clubs">MAX für Vereine <span>→</span></a>
-      <a class="btn btn-secondary" href="#brands">MAX für Brands</a>
+<div class="wrap">
+  <nav class="nav">
+    <a class="wordmark" href="#" aria-label="MAX">
+      <svg viewBox="0 0 168 56" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M2 48V8H13L28 31L43 8H54V48H43V25L31.5 42H24.5L13 25V48H2Z" fill="white"/>
+        <path d="M68 48L86 8H98L116 48H104L100.8 40H83.2L80 48H68ZM87 31H97L92 18L87 31Z" fill="white"/>
+        <path d="M121 48L137 28L121.8 8H135L144 20.5L153 8H166.2L151 28L167 48H153.5L144 35L134.5 48H121Z" fill="white"/>
+      </svg>
+      <small>club intelligence</small>
+    </a>
+    <div class="navlinks">
+      <a href="#clubs">Clubs</a>
+      <a href="#brands">Brands</a>
+      <a href="#how">How it works</a>
+      <a class="navcta" href="#start">Meet MAX</a>
     </div>
-    <div class="hero-note">Football · Handball · Basketball · Volleyball · Hockey · Unihockey · and more</div>
-  </div>
-
-  <div class="visual">
-    <div class="ring"></div>
-    <div class="orb"></div>
-    <div class="float-card fc1"><b>+ CHF 180</b>heute für deinen Club generiert</div>
-    <div class="float-card fc2"><b>18 Spiele erkannt</b>52 Posts vorbereitet</div>
-    <div class="agent">
-      <div class="agent-head">
-        <div class="max-avatar">MAX</div>
-        <div><b>Good evening.</b><span>MAX is working for your club.</span></div>
-        <div class="status"></div>
-      </div>
-      <div class="task"><div class="task-icon">⚡</div><div><b>Weekend content</b><small>18 matches · 52 posts</small></div><span class="done">READY</span></div>
-      <div class="task"><div class="task-icon">◎</div><div><b>Sponsor inventory</b><small>9 placements sold</small></div><span class="done">LIVE</span></div>
-      <div class="task"><div class="task-icon">↗</div><div><b>Bonus reach</b><small>3 unsold slots filled</small></div><span class="done">DONE</span></div>
-      <div class="revenue"><small>SPONSOR REVENUE THIS WEEK</small><strong>CHF 240</strong></div>
-    </div>
-  </div>
-</section>
-
-<div class="marquee">
-  <div class="marquee-track">
-    <span>MAXimale Reichweite</span><span>MAXimaler Umsatz</span><span>MAXimale Sichtbarkeit</span><span>MAXimale Automatisierung</span><span>Minimaler Aufwand</span>
-    <span>MAXimale Reichweite</span><span>MAXimaler Umsatz</span><span>MAXimale Sichtbarkeit</span><span>MAXimale Automatisierung</span><span>Minimaler Aufwand</span>
-  </div>
+  </nav>
 </div>
 
-<section class="shell section" id="clubs">
-  <div class="eyebrow">MAX for Clubs</div>
-  <h2>Mehr aus jedem Spiel.<br><span class="gradient-text">Ohne mehr Arbeit.</span></h2>
-  <p class="lead">MAX arbeitet im Hintergrund für deinen Verein. Spielplan rein — Content, Sponsoring-Inventar und Vermarktung laufen automatisch weiter.</p>
+<main>
+<section class="wrap hero">
+  <div class="hero-copy">
+    <div class="eyebrow">Dein digitaler Teammate</div>
+    <h1><span class="maximal">MAXimal</span> mehr.<br>Minimal Aufwand.</h1>
+    <p>MAX macht aus jedem Spiel automatisch Content, Reichweite und digitales Sponsoring-Inventar — für Sportvereine jeder Liga und jeder Sportart.</p>
+    <div class="actions">
+      <a class="btn primary" href="#clubs">Für Vereine</a>
+      <a class="btn secondary" href="#brands">Für Sponsoren</a>
+    </div>
+    <div class="sports">FOOTBALL · HANDBALL · BASKETBALL · VOLLEYBALL · HOCKEY · UNIHOCKEY · MORE</div>
+  </div>
 
-  <div class="grid-5">
-    <article class="value-card" style="--accent:#65f3c8"><div class="num">01</div><h3><span>MAX</span>imale<br>Reichweite</h3><p>Jeder Spieltag wird zum digitalen Moment für Fans, Teams und Partner.</p></article>
-    <article class="value-card" style="--accent:#5bd9ff"><div class="num">02</div><h3><span>MAX</span>imaler<br>Umsatz</h3><p>Jedes Spiel erzeugt direkt buchbare digitale Sponsorflächen.</p></article>
-    <article class="value-card" style="--accent:#8d80ff"><div class="num">03</div><h3><span>MAX</span>imale<br>Sichtbarkeit</h3><p>Mehr Präsenz für den ganzen Verein — vom Nachwuchs bis zum Fanionteam.</p></article>
-    <article class="value-card" style="--accent:#dc6dff"><div class="num">04</div><h3><span>MAX</span>imale<br>Automatisierung</h3><p>MAX erkennt Spiele, bereitet Posts vor und organisiert freie Placements.</p></article>
-    <article class="value-card" style="--accent:#b6ff6f"><div class="num">05</div><h3><span>MAX</span>imale Wirkung.<br>Minimaler Aufwand.</h3><p>Mehr Content und neue Einnahmen, ohne zusätzliche Vereinsarbeit.</p></article>
+  <div class="agent-wrap">
+    <div class="agent-glow"></div>
+    <div class="agent">
+      <div class="agent-top">
+        <div class="agent-dot">MAX</div>
+        <div class="agent-title"><b>MAX is working.</b><span>Your club is ready for the weekend.</span></div>
+        <div class="online"></div>
+      </div>
+      <div class="agent-line"></div>
+      <div class="summary">
+        <div><small>Sponsor revenue this week</small><strong>CHF 240</strong></div>
+        <div class="delta">+18%</div>
+      </div>
+      <div class="tasks">
+        <div class="task"><div><b>Weekend content</b><span>18 matches · 52 posts prepared</span></div><em>READY</em></div>
+        <div class="task"><div><b>Sponsor inventory</b><span>9 placements sold · 3 available</span></div><em>LIVE</em></div>
+        <div class="task"><div><b>Bonus reach</b><span>3 unsold placements filled</span></div><em>DONE</em></div>
+        <div class="task"><div><b>Performance</b><span>Views and clicks tracked</span></div><em>LIVE</em></div>
+      </div>
+      <div class="agent-foot"><span>MAX CLUB OS</span><span>ONLINE</span></div>
+    </div>
   </div>
 </section>
 
-<section class="shell section" id="brands">
-  <div class="eyebrow">MAX for Brands</div>
-  <h2>Lokale Aufmerksamkeit.<br><span class="gradient-text">So einfach wie Ads.</span></h2>
-  <p class="lead">Keine langen Sponsoringverträge. Verein wählen, Spiel wählen, Moment wählen, online bezahlen. Oder Budget setzen und MAX automatisch buchen lassen.</p>
-
-  <div class="grid-5">
-    <article class="value-card" style="--accent:#65f3c8"><div class="num">01</div><h3><span>MAX</span>imale<br>lokale Reichweite</h3><p>Direkt in Sport-Communities, die ihren Verein aktiv verfolgen.</p></article>
-    <article class="value-card" style="--accent:#5bd9ff"><div class="num">02</div><h3><span>MAX</span>imale<br>Flexibilität</h3><p>Ein Post, ein Spiel, mehrere Clubs oder ein fixes Monatsbudget.</p></article>
-    <article class="value-card" style="--accent:#8d80ff"><div class="num">03</div><h3><span>MAX</span>imale<br>Aufmerksamkeit</h3><p>Deine Marke erscheint in echten Sportmomenten statt zwischen beliebigen Ads.</p></article>
-    <article class="value-card" style="--accent:#dc6dff"><div class="num">04</div><h3><span>MAX</span>imale<br>Transparenz</h3><p>Views, Klicks und Performance werden sichtbar statt nur versprochen.</p></article>
-    <article class="value-card" style="--accent:#b6ff6f"><div class="num">05</div><h3><span>MAX</span>imaler<br>Wert</h3><p>Mengenrabatte, Bonus-Inventar und automatische Budgetoptimierung inklusive.</p></article>
+<section class="strip">
+  <div class="wrap">
+    <div><b>MAX</b>imale Reichweite</div>
+    <div><b>MAX</b>imaler Umsatz</div>
+    <div><b>MAX</b>imale Sichtbarkeit</div>
+    <div><b>MAX</b>imale Automatisierung</div>
+    <div><b>MIN</b>imaler Aufwand</div>
   </div>
 </section>
 
-<section class="shell section">
-  <div class="eyebrow">One teammate. Two sides.</div>
-  <h2>MAX arbeitet für Clubs.<br><span class="gradient-text">Und macht sie buchbar.</span></h2>
-  <div class="split">
-    <article class="big-card" style="--glow:#5ff2c5">
-      <div class="eyebrow">CLUB MODE</div>
+<section class="wrap section" id="clubs">
+  <div class="head">
+    <div class="eyebrow">MAX for Clubs</div>
+    <div>
+      <h2>Mehr Verein.<br><span class="maximal">Weniger Arbeit.</span></h2>
+      <p>MAX arbeitet im Hintergrund. Er kennt den Spielplan, erstellt Content, vermarktet digitale Sponsorflächen und zeigt, was daraus entsteht.</p>
+    </div>
+  </div>
+
+  <div class="cards">
+    <article class="card" style="--c:#78F3D0"><div class="n">01</div><h3><span>MAX</span>imale<br>Reichweite</h3><p>Jedes Spiel wird zu einem digitalen Moment für Fans und Partner.</p></article>
+    <article class="card" style="--c:#6BB7FF"><div class="n">02</div><h3><span>MAX</span>imaler<br>Umsatz</h3><p>Aus Spielen werden direkt buchbare Sponsorflächen.</p></article>
+    <article class="card" style="--c:#9A7BFF"><div class="n">03</div><h3><span>MAX</span>imale<br>Sichtbarkeit</h3><p>Vom Nachwuchs bis zum Fanionteam sichtbar bleiben.</p></article>
+    <article class="card" style="--c:#DF74FF"><div class="n">04</div><h3><span>MAX</span>imale<br>Automatisierung</h3><p>Wiederkehrende Arbeit läuft automatisch im Hintergrund.</p></article>
+    <article class="card" style="--c:#A7FF8A"><div class="n">05</div><h3><span>MAX</span>imale Wirkung.<br>Minimaler Aufwand.</h3><p>Mehr Content und Einnahmen ohne zusätzlichen Vereinsjob.</p></article>
+  </div>
+</section>
+
+<section class="wrap section" id="brands">
+  <div class="head">
+    <div class="eyebrow">MAX for Brands</div>
+    <div>
+      <h2>Lokale Reichweite.<br><span class="maximal">Direkt buchbar.</span></h2>
+      <p>Spiel auswählen, Placement wählen, online bezahlen — oder einfach ein Budget setzen und MAX die passenden Sportmomente automatisch buchen lassen.</p>
+    </div>
+  </div>
+
+  <div class="cards">
+    <article class="card" style="--c:#78F3D0"><div class="n">01</div><h3><span>MAX</span>imale lokale<br>Reichweite</h3><p>Direkt in relevanten lokalen Sport-Communities.</p></article>
+    <article class="card" style="--c:#6BB7FF"><div class="n">02</div><h3><span>MAX</span>imale<br>Flexibilität</h3><p>Ein Post, ein Spiel, mehrere Vereine oder fixes Budget.</p></article>
+    <article class="card" style="--c:#9A7BFF"><div class="n">03</div><h3><span>MAX</span>imale<br>Aufmerksamkeit</h3><p>Marken erscheinen in echten Sportmomenten, nicht zwischen beliebigen Ads.</p></article>
+    <article class="card" style="--c:#DF74FF"><div class="n">04</div><h3><span>MAX</span>imale<br>Transparenz</h3><p>Views, Klicks und Kampagnenleistung werden messbar.</p></article>
+    <article class="card" style="--c:#A7FF8A"><div class="n">05</div><h3><span>MAX</span>imaler<br>Wert</h3><p>Bulk-Rabatte, Bonus-Inventar und automatische Budgetverteilung.</p></article>
+  </div>
+</section>
+
+<section class="wrap section">
+  <div class="two">
+    <article class="panel" style="--glow:#78F3D0">
+      <div class="eyebrow">Club Mode</div>
       <h3>MAX runs the weekend.</h3>
-      <p>Vom Spielplan bis zum Sponsor-Report. Der Verein gibt die Richtung vor — MAX erledigt den wiederkehrenden Rest.</p>
-      <div class="steps">
-        <div class="step"><i>01</i><b>Spielplan synchronisieren</b><span>AUTO</span></div>
-        <div class="step"><i>02</i><b>Content vorbereiten</b><span>AUTO</span></div>
-        <div class="step"><i>03</i><b>Sponsor-Slots freigeben</b><span>LIVE</span></div>
-        <div class="step"><i>04</i><b>Performance reporten</b><span>TRACKED</span></div>
+      <p>Der Verein gibt die Richtung vor. MAX erledigt den wiederkehrenden Rest.</p>
+      <div class="list">
+        <div class="row"><i>01</i><b>Spielplan synchronisieren</b><span>AUTO</span></div>
+        <div class="row"><i>02</i><b>Content vorbereiten</b><span>AUTO</span></div>
+        <div class="row"><i>03</i><b>Sponsor-Slots vermarkten</b><span>LIVE</span></div>
+        <div class="row"><i>04</i><b>Performance reporten</b><span>TRACKED</span></div>
       </div>
-      <div class="brand-cloud"><span>Matchday</span><span>Kickoff</span><span>Full Time</span><span>Player of the Day</span><span>Weekend Recap</span></div>
+      <div class="tags"><span>Matchday</span><span>Kickoff</span><span>Full Time</span><span>Player of the Day</span><span>Recap</span></div>
     </article>
 
-    <article class="big-card" style="--glow:#9b67ff">
-      <div class="eyebrow">BRAND MODE</div>
+    <article class="panel" style="--glow:#9A7BFF">
+      <div class="eyebrow">Brand Mode</div>
       <h3>Pick. Pay. Play.</h3>
-      <p>Lokale Sponsoring-Reichweite wird so buchbar wie digitale Werbung — ohne Offerten, Meetings oder Jahresvertrag.</p>
-      <div class="steps">
-        <div class="step"><i>01</i><b>Club & Spiel auswählen</b><span>PICK</span></div>
-        <div class="step"><i>02</i><b>Placement buchen</b><span>FROM CHF 20</span></div>
-        <div class="step"><i>03</i><b>Logo & Content hochladen</b><span>PREVIEW</span></div>
-        <div class="step"><i>04</i><b>Online bezahlen</b><span>DONE</span></div>
+      <p>Lokales Sponsoring wird so einfach buchbar wie digitale Werbung.</p>
+      <div class="list">
+        <div class="row"><i>01</i><b>Club & Spiel wählen</b><span>PICK</span></div>
+        <div class="row"><i>02</i><b>Placement buchen</b><span>FROM CHF 20</span></div>
+        <div class="row"><i>03</i><b>Logo & Content hochladen</b><span>PREVIEW</span></div>
+        <div class="row"><i>04</i><b>Online bezahlen</b><span>DONE</span></div>
       </div>
-      <div class="brand-cloud"><span>Single Post</span><span>Bulk</span><span>Auto Budget</span><span>Bonus Reach</span><span>Performance</span></div>
+      <div class="tags"><span>Single Post</span><span>Bulk</span><span>Auto Budget</span><span>Bonus Reach</span><span>Performance</span></div>
     </article>
   </div>
 </section>
 
-<section class="shell section" id="how">
-  <div class="eyebrow">How MAX works</div>
-  <h2>Ein Spiel wird zum<br><span class="gradient-text">digitalen Produkt.</span></h2>
-  <p class="lead">MAX verwandelt jedes Ligaspiel automatisch in Content und buchbare Sponsoring-Momente.</p>
-  <div class="flow-grid">
-    <div class="flow-card"><div class="flow-icon">▦</div><b>1. Match</b><p>MAX erkennt Spiel, Teams, Termin und Wettbewerb aus dem Ligakalender.</p></div>
-    <div class="flow-card"><div class="flow-icon">✦</div><b>2. Content</b><p>Matchday, Kickoff, Full Time und Player of the Day werden vorbereitet.</p></div>
-    <div class="flow-card"><div class="flow-icon">◎</div><b>3. Sponsor</b><p>Freie Placements werden im Marketplace buchbar oder automatisch verteilt.</p></div>
-    <div class="flow-card"><div class="flow-icon">↗</div><b>4. Growth</b><p>Fans bekommen besseren Content, Brands lokale Reichweite und Clubs neue Einnahmen.</p></div>
+<section class="wrap section" id="how">
+  <div class="head">
+    <div class="eyebrow">How MAX works</div>
+    <div>
+      <h2>Ein Spiel wird zum<br><span class="maximal">digitalen Produkt.</span></h2>
+      <p>MAX verbindet Ligadaten, Content und Sponsoring in einem einzigen automatisierten Prozess.</p>
+    </div>
+  </div>
+
+  <div class="flow">
+    <div class="flowbox"><div class="num">01 / MATCH</div><h3>Spiel erkennen</h3><p>Termin, Teams und Wettbewerb kommen aus dem Ligakalender.</p></div>
+    <div class="flowbox"><div class="num">02 / CONTENT</div><h3>Momente erstellen</h3><p>Matchday, Kickoff, Full Time und Player of the Day.</p></div>
+    <div class="flowbox"><div class="num">03 / BRAND</div><h3>Inventar verkaufen</h3><p>Sponsoren buchen Slots selbst oder geben MAX ein Budget.</p></div>
+    <div class="flowbox"><div class="num">04 / GROWTH</div><h3>Wert messen</h3><p>Reichweite, Klicks und Einnahmen werden transparent.</p></div>
   </div>
 </section>
 
-<section class="shell section" id="start">
-  <div class="quote">
-    <div class="eyebrow">Meet MAX</div>
-    <h2><span class="gradient-text">Every club deserves an extra teammate.</span></h2>
-    <p>MAX arbeitet jeden Spieltag für deinen Verein — automatisch, messbar und immer mit einem Ziel: mehr aus dem zu machen, was bereits da ist.</p>
-    <a class="btn btn-primary" href="mailto:hello@max.club">MAX für meinen Verein testen →</a>
+<section class="wrap" id="start">
+  <div class="cta">
+    <div class="eyebrow" style="justify-content:center">Meet MAX</div>
+    <h2>Every club deserves an extra teammate.</h2>
+    <p>MAX arbeitet jeden Spieltag für deinen Verein — automatisch, messbar und mit einem klaren Auftrag: das Maximum aus dem herauszuholen, was bereits da ist.</p>
+    <div class="actions"><a class="btn primary" href="mailto:hello@max.club">MAX testen</a></div>
   </div>
 </section>
 </main>
 
-<footer class="shell footer">
-  <strong>MAX</strong>
-  <span>MAX your reach. MAX your revenue. MAX your club.</span>
+<footer class="wrap">
+  <div class="footer-logo">MAX</div>
+  <span>MAXimale Reichweite · MAXimaler Umsatz · Minimaler Aufwand</span>
 </footer>
-
-<script>
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.animate(
-        [{opacity:0,transform:'translateY(22px)'},{opacity:1,transform:'translateY(0)'}],
-        {duration:650,easing:'cubic-bezier(.2,.8,.2,1)',fill:'both'}
-      );
-      observer.unobserve(e.target);
-    }
-  });
-},{threshold:.12});
-document.querySelectorAll('.value-card,.big-card,.flow-card,.quote').forEach(el=>observer.observe(el));
-</script>
 </body>
 </html>
