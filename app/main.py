@@ -8,7 +8,7 @@ from pydantic import BaseModel
 
 ROOT=Path(__file__).resolve().parent.parent
 DB=Path(os.getenv("CLUBFLOW_DB_PATH", str(ROOT/"clubflow.db")))
-app=FastAPI(title="FVRZ App · FC Oberwinterthur Pilot", version="0.4.0")
+app=FastAPI(title="FVRZ App · FC Oberwinterthur Pilot", version="0.5.0")
 
 FIXTURES=[
 ("1. Mannschaft","FC Niederweningen 1","2026-09-26 18:00","Huebwis, Niederweningen","2. Liga · Gruppe 2",2,2,"finished"),
@@ -32,6 +32,9 @@ def init():
       competition TEXT, gf INTEGER, ga INTEGER, status TEXT);
     CREATE TABLE IF NOT EXISTS content(
       id INTEGER PRIMARY KEY, match_id INTEGER, channel TEXT, kind TEXT, caption TEXT, status TEXT DEFAULT 'draft');
+    CREATE TABLE IF NOT EXISTS sponsor_campaigns(
+      id INTEGER PRIMARY KEY, sponsor_name TEXT, club TEXT, package TEXT, price INTEGER,
+      headline TEXT, status TEXT DEFAULT 'booked', created_at TEXT DEFAULT CURRENT_TIMESTAMP);
     """)
     if c.execute("select count(*) from matches").fetchone()[0]==0:
         c.executemany("insert into matches(team,opponent,kickoff,venue,competition,gf,ga,status) values(?,?,?,?,?,?,?,?)",FIXTURES)
@@ -79,8 +82,28 @@ def content_action(cid:int,action:str):
     c.execute("update content set status=? where id=?",(status,cid)); c.commit(); c.close()
     return {"ok":True,"status":status}
 
+
+class SponsorCampaign(BaseModel):
+    sponsor_name:str
+    club:str
+    package:str
+    price:int
+    headline:str=""
+
+@app.post("/api/sponsor/campaign")
+def create_sponsor_campaign(campaign:SponsorCampaign):
+    c=conn()
+    cur=c.execute(
+        "insert into sponsor_campaigns(sponsor_name,club,package,price,headline,status) values(?,?,?,?,?,?)",
+        (campaign.sponsor_name,campaign.club,campaign.package,campaign.price,campaign.headline,"booked")
+    )
+    c.commit()
+    cid=cur.lastrowid
+    c.close()
+    return {"ok":True,"campaign_id":cid,"status":"booked"}
+
 @app.get("/health")
-def health(): return {"status":"ok","club":"FC Oberwinterthur","version":"0.4.0"}
+def health(): return {"status":"ok","club":"FC Oberwinterthur","version":"0.5.0"}
 
 @app.get("/",response_class=HTMLResponse)
 def home():
@@ -197,7 +220,7 @@ def home():
 @media(max-width:620px){{.wrap{{width:94vw;margin-top:14px}}.hero{{border-radius:22px}}.hero-copy{{padding:36px 24px 10px}}.hero h1{{font-size:48px}}.phone{{width:340px;height:590px}}.queue-row{{grid-template-columns:32px 1fr auto}}.queue-row>button,.done-chip{{grid-column:2/4;justify-self:start}}.state{{grid-column:3}}.game{{grid-template-columns:58px 1fr}}.game>div:last-child{{grid-column:2}}.topbar{{padding:0 3vw}}}}
 </style></head>
 <body>
-<div class='topbar'><div class='brand'><div class='brandmark'>FCO</div><div><b>FVRZ App</b><span>FC Oberwinterthur · Pilot</span></div></div><div class='live'><i class='dot'></i> Live Demo</div></div>
+<div class='topbar'><div class='brand'><div class='brandmark'>FCO</div><div><b>FVRZ App</b><span>FC Oberwinterthur · Pilot</span></div></div><div style='display:flex;gap:10px;align-items:center'><a href='/sponsor' style='font-size:11px;font-weight:900;color:#092e66;text-decoration:none;background:#ffd817;padding:9px 11px;border-radius:999px'>Sponsor Portal</a><div class='live'><i class='dot'></i> Live Demo</div></div></div>
 <main class='wrap'>
 <section class='hero'>
   <div class='hero-copy'>
@@ -238,3 +261,156 @@ async function act(id,a){{await fetch('/api/content/'+id+'/'+a,{{method:'POST'}}
 async function finish(id){{let s=prompt('Resultat aus Sicht FC Oberwinterthur, z.B. 3:1');if(!s)return;let p=s.split(':');if(p.length!==2)return;await fetch('/api/matches/'+id+'/finish',{{method:'POST',headers:{{'content-type':'application/json'}},body:JSON.stringify({{goals_for:+p[0],goals_against:+p[1]}})}});location.reload()}}
 </script>
 </body></html>""")
+
+
+@app.get("/sponsor",response_class=HTMLResponse)
+def sponsor_portal():
+    return HTMLResponse("""<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sponsor Portal · FVRZ App</title>
+<style>
+:root{--navy:#071c3d;--blue:#0b3c78;--yellow:#ffd817;--green:#25d366;--bg:#f4f6f8;--line:#e4e7ec;--muted:#667085;--ink:#101828;--white:#fff}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
+button,input,textarea{font:inherit}.hidden{display:none!important}.top{height:68px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 4vw;position:sticky;top:0;z-index:30}
+.brand{display:flex;align-items:center;gap:11px}.mark{width:38px;height:38px;border-radius:11px;background:var(--navy);color:var(--yellow);display:grid;place-items:center;font-weight:1000}.brand b{display:block}.brand span{font-size:11px;color:var(--muted)}
+.user{display:flex;align-items:center;gap:10px;font-size:12px}.avatar{width:32px;height:32px;border-radius:50%;background:#eef2f6;display:grid;place-items:center;font-weight:900;color:var(--blue)}
+.shell{width:min(1250px,94vw);margin:24px auto 60px}.hero{background:linear-gradient(135deg,#071c3d,#0b3c78);color:#fff;border-radius:26px;padding:44px 48px;display:flex;justify-content:space-between;align-items:end;gap:24px}.hero small{color:var(--yellow);font-weight:900;letter-spacing:.14em}.hero h1{font-size:48px;line-height:1;margin:9px 0 12px;letter-spacing:-.04em}.hero p{margin:0;color:#cbd5e1;max-width:680px;line-height:1.5}.steps{display:flex;gap:6px;flex-wrap:wrap}.steps span{font-size:10px;padding:8px 10px;border-radius:999px;background:#ffffff12;border:1px solid #ffffff1f}
+.layout{display:grid;grid-template-columns:1.08fr .92fr;gap:18px;margin-top:20px}.card{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 8px 24px #10182808}.pad{padding:22px}.section-title{display:flex;justify-content:space-between;align-items:end;margin-bottom:14px}.section-title h2{margin:4px 0 0;font-size:22px}.eyebrow{font-size:10px;font-weight:900;letter-spacing:.13em;color:#175cd3}.muted{font-size:11px;color:var(--muted)}
+.club-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.club{border:1px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;transition:.16s;background:#fff}.club:hover{border-color:#9db6d3}.club.active{border:2px solid var(--blue);background:#f4f8fd}.club-logo{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--yellow);border:2px solid var(--blue);color:var(--blue);font-weight:1000;font-size:10px;margin-bottom:10px}.club b{font-size:12px;display:block}.club span{font-size:10px;color:var(--muted)}
+.packages{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}.pkg{border:1px solid var(--line);border-radius:15px;padding:16px;cursor:pointer;position:relative;min-height:190px}.pkg.active{border:2px solid var(--blue);background:#f7faff}.pkg.popular:before{content:"BELIEBT";position:absolute;top:-9px;right:10px;background:var(--yellow);color:var(--navy);font-size:8px;font-weight:1000;padding:4px 6px;border-radius:999px}.pkg h3{font-size:14px;margin:0 0 4px}.price{font-size:25px;font-weight:1000;color:var(--blue)}.price small{font-size:9px;color:var(--muted);font-weight:600}.pkg ul{padding-left:17px;margin:10px 0 0;font-size:10px;line-height:1.7;color:#475467}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field label{display:block;font-size:10px;font-weight:800;margin-bottom:6px}.field input,.field textarea{width:100%;border:1px solid #d0d5dd;border-radius:10px;padding:11px 12px;background:#fff;outline:none}.field input:focus,.field textarea:focus{border-color:#6b9bd1;box-shadow:0 0 0 3px #dbeafe}.field.full{grid-column:1/-1}.upload{border:1.5px dashed #cbd5e1;border-radius:13px;padding:14px;background:#f8fafc}.upload input{font-size:10px;padding:0;border:0}.upload .hint{font-size:9px;color:var(--muted);margin-top:5px}
+.preview-wrap{position:sticky;top:88px}.tabs{display:flex;gap:5px;margin-bottom:10px}.tabs button{border:0;background:#eef2f6;border-radius:999px;padding:8px 10px;font-size:10px;font-weight:800;cursor:pointer}.tabs button.active{background:var(--navy);color:#fff}.phone{width:min(360px,100%);margin:auto;background:#121212;border:6px solid #151515;border-radius:42px;padding:7px;box-shadow:0 24px 55px #0f172a22}.screen{background:#efeae2;border-radius:31px;overflow:hidden;min-height:600px}.wa-head{background:#fff;padding:23px 13px 10px;display:flex;gap:9px;align-items:center}.fco{width:38px;height:38px;border-radius:50%;background:var(--yellow);border:2px solid var(--blue);display:grid;place-items:center;color:var(--blue);font-size:10px;font-weight:1000}.wa-head b{font-size:13px;display:block}.wa-head span{font-size:9px;color:var(--muted)}.wa-feed{padding:9px}.wa-post{background:#fff;border-radius:11px;padding:5px;box-shadow:0 1px 2px #0002}.art{height:250px;background:linear-gradient(145deg,#062552,#0b4a8b);border-radius:8px;color:#fff;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px}.slash{position:absolute;background:var(--yellow);width:280px;height:30px;transform:rotate(-8deg);top:5px;left:-75px}.slash.two{top:auto;bottom:18px;left:auto;right:-95px;height:17px}.art .type{position:absolute;top:15px;left:15px;color:var(--yellow);font-size:24px;font-weight:1000;font-style:italic}.art .clubname{font-size:21px;font-weight:1000}.art .vs{color:var(--yellow);font-size:11px;font-weight:900;margin:5px}.art .opp{font-size:18px;font-weight:900}.art .when{font-size:10px;color:#d6e0ed;margin-top:14px}.sponsor-brand{position:absolute;bottom:10px;left:12px;right:12px;background:#fff;border-radius:8px;padding:8px 10px;color:#102a4f;display:flex;align-items:center;gap:9px;text-align:left}.logo-slot{width:42px;height:30px;border-radius:6px;background:#f2f4f7;display:grid;place-items:center;overflow:hidden;font-size:8px;font-weight:900}.logo-slot img{width:100%;height:100%;object-fit:contain}.sponsor-brand b{font-size:9px;display:block}.sponsor-brand span{font-size:8px;color:#667085}.copy{font-size:10px;line-height:1.45;padding:8px 7px}.reactions{display:flex;justify-content:space-between;color:#7d8590;font-size:9px;padding:0 7px 6px}.reaction-pill{background:#f2f4f7;border-radius:999px;padding:4px 6px}
+.order{margin-top:14px;border-top:1px solid var(--line);padding-top:14px}.order-row{display:flex;justify-content:space-between;font-size:11px;padding:5px 0}.order-row.total{font-size:15px;font-weight:900;border-top:1px solid var(--line);margin-top:7px;padding-top:11px}.cta{width:100%;border:0;background:var(--navy);color:#fff;padding:13px 15px;border-radius:11px;font-weight:900;cursor:pointer;margin-top:12px}.cta:hover{background:#0d356e}.subcta{width:100%;border:1px solid var(--line);background:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer;margin-top:8px}
+.success{background:#ecfdf3;border:1px solid #abefc6;color:#05603a;border-radius:14px;padding:15px;margin-top:12px;font-size:11px}.success b{display:block;font-size:14px;margin-bottom:3px}
+.login-overlay{position:fixed;inset:0;background:linear-gradient(135deg,#04152eeb,#0b3c78ef);z-index:100;display:grid;place-items:center;padding:20px}.login{width:min(430px,95vw);background:#fff;border-radius:24px;padding:30px;box-shadow:0 30px 90px #0006}.login-mark{width:48px;height:48px;border-radius:14px;background:var(--navy);color:var(--yellow);display:grid;place-items:center;font-weight:1000;margin-bottom:20px}.login h2{font-size:28px;margin:0 0 8px}.login p{color:var(--muted);font-size:12px;line-height:1.5}.login input{width:100%;padding:12px;border:1px solid #d0d5dd;border-radius:10px;margin-top:8px}.demo-note{background:#fffaeb;color:#7a2e0e;border-radius:10px;padding:10px;font-size:10px;margin-top:12px}
+@media(max-width:950px){.layout{grid-template-columns:1fr}.preview-wrap{position:static}.hero{display:block}.steps{margin-top:20px}}@media(max-width:640px){.shell{width:96vw}.hero{padding:32px 24px}.hero h1{font-size:38px}.club-grid,.packages{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.phone{width:330px}.top{padding:0 3vw}}
+</style></head>
+<body>
+<div class="login-overlay" id="loginOverlay">
+  <div class="login">
+    <div class="login-mark">SP</div>
+    <div class="eyebrow">SPONSOR PORTAL</div>
+    <h2>Willkommen zurück</h2>
+    <p>Wähle deinen Verein, buche digitale Sponsoring-Flächen und sieh bereits vor der Buchung, wie deine Marke im Club-Content erscheint.</p>
+    <input id="loginEmail" value="marketing@garage-keller.ch" placeholder="E-Mail">
+    <input type="password" value="demo1234" placeholder="Passwort">
+    <button class="cta" onclick="loginDemo()">Demo-Zugang öffnen</button>
+    <div class="demo-note">Demo-Login: keine echten Zugangsdaten erforderlich.</div>
+  </div>
+</div>
+
+<div class="top">
+  <div class="brand"><div class="mark">SP</div><div><b>Sponsor Portal</b><span>FVRZ App · Self Service</span></div></div>
+  <div class="user"><span id="topSponsor">Garage Keller AG</span><div class="avatar">GK</div></div>
+</div>
+
+<main class="shell">
+  <section class="hero">
+    <div><small>SPONSOR SELF-SERVICE</small><h1>Deine Marke.<br>Direkt im Spiel.</h1><p>Verein auswählen, Paket buchen, Logo hochladen und den fertigen Post sofort als Vorschau sehen. Der Club muss nur noch freigeben.</p></div>
+    <div class="steps"><span>1 Verein</span><span>2 Paket</span><span>3 Branding</span><span>4 Preview</span><span>5 Buchen</span></div>
+  </section>
+
+  <div class="layout">
+    <div>
+      <section class="card pad">
+        <div class="section-title"><div><div class="eyebrow">1 · VEREIN</div><h2>Wo willst du sichtbar sein?</h2></div><div class="muted">Demo-Auswahl</div></div>
+        <div class="club-grid">
+          <div class="club active" data-club="FC Oberwinterthur" onclick="selectClub(this)"><div class="club-logo">FCO</div><b>FC Oberwinterthur</b><span>Winterthur · Demo</span></div>
+          <div class="club" data-club="FC Seuzach" onclick="selectClub(this)"><div class="club-logo">FCS</div><b>FC Seuzach</b><span>Region Winterthur · Demo</span></div>
+          <div class="club" data-club="FC Töss" onclick="selectClub(this)"><div class="club-logo">FCT</div><b>FC Töss</b><span>Winterthur · Demo</span></div>
+        </div>
+      </section>
+
+      <section class="card pad" style="margin-top:14px">
+        <div class="section-title"><div><div class="eyebrow">2 · PAKET</div><h2>Wähle dein Sponsoring</h2></div><div class="muted">Preise nur Demo</div></div>
+        <div class="packages">
+          <div class="pkg" data-name="Matchday Partner" data-price="590" onclick="selectPackage(this)">
+            <h3>Matchday Partner</h3><div class="price">CHF 590 <small>/ Saison</small></div>
+            <ul><li>Matchday Posts</li><li>WhatsApp + Instagram</li><li>Logo im Footer</li><li>Basis-Reporting</li></ul>
+          </div>
+          <div class="pkg active popular" data-name="Digital Partner" data-price="1490" onclick="selectPackage(this)">
+            <h3>Digital Partner</h3><div class="price">CHF 1'490 <small>/ Saison</small></div>
+            <ul><li>Matchday + Result</li><li>Weekend Recap</li><li>WhatsApp + Social</li><li>Logo + Claim</li><li>Monatsreport</li></ul>
+          </div>
+          <div class="pkg" data-name="Season Partner" data-price="3900" onclick="selectPackage(this)">
+            <h3>Season Partner</h3><div class="price">CHF 3'900 <small>/ Saison</small></div>
+            <ul><li>Alle Digital-Formate</li><li>Exklusive Placements</li><li>Kampagnen-Content</li><li>Priority Slot</li><li>Reporting Dashboard</li></ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="card pad" style="margin-top:14px">
+        <div class="section-title"><div><div class="eyebrow">3 · BRANDING</div><h2>Deine Inhalte</h2></div><div class="muted">Live in der Vorschau</div></div>
+        <div class="form-grid">
+          <div class="field"><label>Unternehmen</label><input id="sponsorName" value="Garage Keller AG" oninput="updatePreview()"></div>
+          <div class="field"><label>Claim / Kurztext</label><input id="headline" value="Mobilität für Winterthur." oninput="updatePreview()"></div>
+          <div class="field full"><label>Logo</label><div class="upload"><input type="file" id="logoInput" accept="image/*" onchange="loadLogo(event)"><div class="hint">PNG, JPG oder SVG · Vorschau erscheint sofort</div></div></div>
+          <div class="field full"><label>Eigener Kampagnen-Content</label><div class="upload"><input type="file" id="assetInput" accept="image/*,video/*,.pdf" onchange="assetChosen(event)"><div class="hint" id="assetHint">Optional: Bild, Video oder PDF hochladen</div></div></div>
+          <div class="field full"><label>Begleittext</label><textarea id="copyText" rows="3" oninput="updatePreview()">Heute mit uns zum Heimspiel – Hopp Oberi! 💛💙</textarea></div>
+        </div>
+      </section>
+    </div>
+
+    <aside class="preview-wrap">
+      <section class="card pad">
+        <div class="section-title"><div><div class="eyebrow">4 · LIVE PREVIEW</div><h2>So sieht dein Placement aus</h2></div><div class="muted">Mockup</div></div>
+        <div class="tabs"><button class="active">WhatsApp</button><button onclick="alert('Instagram-Preview kommt als nächster Schritt.')">Instagram</button><button onclick="alert('Facebook-Preview kommt als nächster Schritt.')">Facebook</button></div>
+        <div class="phone"><div class="screen">
+          <div class="wa-head"><div class="fco" id="clubLogo">FCO</div><div><b id="waClub">FC Oberwinterthur</b><span>WhatsApp Channel</span></div></div>
+          <div class="wa-feed"><div class="wa-post">
+            <div class="art"><div class="slash"></div><div class="slash two"></div><div class="type">MATCHDAY</div>
+              <div class="clubname" id="artClub">FC Oberwinterthur</div><div class="vs">VS</div><div class="opp">FC Pfäffikon</div>
+              <div class="when">Sa, 03.10.2026 · 16:30 · Hegmatten</div>
+              <div class="sponsor-brand"><div class="logo-slot" id="logoSlot">LOGO</div><div><b id="previewSponsor">Garage Keller AG</b><span id="previewClaim">Mobilität für Winterthur.</span></div></div>
+            </div>
+            <div class="copy"><b>⚽ MATCHDAY</b><br><span id="copyClub">FC Oberwinterthur</span> vs FC Pfäffikon<br>🕓 16:30 Uhr · 📍 Hegmatten<br><br><span id="previewCopy">Heute mit uns zum Heimspiel – Hopp Oberi! 💛💙</span></div>
+            <div class="reactions"><span class="reaction-pill">💛 💙 👍 42</span><span>08:12 ↗</span></div>
+          </div></div>
+        </div></div>
+
+        <div class="order">
+          <div class="order-row"><span>Verein</span><b id="orderClub">FC Oberwinterthur</b></div>
+          <div class="order-row"><span>Paket</span><b id="orderPackage">Digital Partner</b></div>
+          <div class="order-row"><span>Setup</span><b>CHF 0</b></div>
+          <div class="order-row total"><span>Gesamt</span><span id="orderPrice">CHF 1'490</span></div>
+          <button class="cta" onclick="bookCampaign()">Kampagne buchen</button>
+          <button class="subcta" onclick="window.location='/'">Zur Club-Demo</button>
+          <div class="success hidden" id="successBox"><b>Kampagne gebucht</b><span id="successText"></span></div>
+        </div>
+      </section>
+    </aside>
+  </div>
+</main>
+
+<script>
+let selectedClub="FC Oberwinterthur", selectedPackage="Digital Partner", selectedPrice=1490, logoData=null;
+function loginDemo(){document.getElementById('loginOverlay').classList.add('hidden')}
+function selectClub(el){
+ document.querySelectorAll('.club').forEach(x=>x.classList.remove('active'));el.classList.add('active');
+ selectedClub=el.dataset.club; document.getElementById('orderClub').textContent=selectedClub;
+ document.getElementById('waClub').textContent=selectedClub; document.getElementById('artClub').textContent=selectedClub;document.getElementById('copyClub').textContent=selectedClub;
+ const abbr=selectedClub.split(' ').map(x=>x[0]).join('').slice(0,3).toUpperCase();document.getElementById('clubLogo').textContent=abbr; updatePreview();
+}
+function selectPackage(el){
+ document.querySelectorAll('.pkg').forEach(x=>x.classList.remove('active'));el.classList.add('active');
+ selectedPackage=el.dataset.name;selectedPrice=+el.dataset.price;
+ document.getElementById('orderPackage').textContent=selectedPackage;document.getElementById('orderPrice').textContent="CHF "+selectedPrice.toLocaleString("de-CH");
+}
+function updatePreview(){
+ const name=document.getElementById('sponsorName').value||"Dein Unternehmen";
+ const claim=document.getElementById('headline').value||"Dein Claim";
+ const copy=document.getElementById('copyText').value||"";
+ document.getElementById('previewSponsor').textContent=name;document.getElementById('previewClaim').textContent=claim;document.getElementById('previewCopy').textContent=copy;
+ document.getElementById('topSponsor').textContent=name;
+}
+function loadLogo(e){
+ const file=e.target.files[0];if(!file)return;const r=new FileReader();r.onload=ev=>{logoData=ev.target.result;document.getElementById('logoSlot').innerHTML='<img src="'+logoData+'" alt="Sponsor logo">'};r.readAsDataURL(file)
+}
+function assetChosen(e){const f=e.target.files[0];if(f)document.getElementById('assetHint').textContent="✓ "+f.name+" bereit für die Kampagne"}
+async function bookCampaign(){
+ const payload={sponsor_name:document.getElementById('sponsorName').value||"Demo Sponsor",club:selectedClub,package:selectedPackage,price:selectedPrice,headline:document.getElementById('headline').value||""};
+ const r=await fetch('/api/sponsor/campaign',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)});
+ const j=await r.json();const box=document.getElementById('successBox');box.classList.remove('hidden');document.getElementById('successText').textContent=" Buchungs-ID #"+j.campaign_id+" · "+selectedClub+" · "+selectedPackage+". Für die Demo wurde keine Zahlung ausgelöst.";
+}
+</script></body></html>""")
+
