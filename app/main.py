@@ -388,7 +388,7 @@ SPONSOR_HTML = """<!doctype html>
 *{box-sizing:border-box}body{margin:0;background:#fff;color:var(--ink);font-family:Manrope,system-ui,sans-serif}button,input,select{font:inherit}.hidden{display:none!important}
 .top{height:72px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 4vw}.brand{display:flex;gap:11px;align-items:center}.mark{width:42px;height:42px;border-radius:13px;background:#151b22;color:#fff;display:grid;place-items:center;font:700 12px Space Grotesk}.brand b{display:block}.brand span{font-size:10px;color:var(--muted)}.top a{font-size:10px;font-weight:800;color:var(--ink);text-decoration:none;border:1px solid var(--line);padding:9px 11px;border-radius:999px}
 .shell{width:min(1180px,93vw);margin:28px auto 70px}.hero{border:1px solid var(--line);border-radius:28px;padding:43px;background:linear-gradient(135deg,#fff,#f7fbff 60%,#f4f0ff);position:relative;overflow:hidden}.eyebrow{font-size:10px;letter-spacing:.14em;font-weight:800;color:#687584;text-transform:uppercase}.hero h1{font:700 clamp(45px,5.5vw,74px)/.96 Space Grotesk;margin:14px 0 15px;letter-spacing:-.055em}.hero h1 span{background:linear-gradient(100deg,#25b99a,var(--blue),var(--violet));-webkit-background-clip:text;color:transparent}.hero p{max-width:720px;color:var(--muted);font-size:14px;line-height:1.65}.chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:22px}.chips span{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 10px;font-size:9px;font-weight:800}
-.layout{display:grid;grid-template-columns:1.08fr .92fr;gap:16px;margin-top:16px}.card{border:1px solid var(--line);border-radius:22px;background:#fff;overflow:hidden}.head{padding:20px 22px;border-bottom:1px solid var(--line)}.head h2{font:700 22px Space Grotesk;margin:4px 0 0}.body{padding:18px}.matches{display:grid;gap:8px}.match{border:1px solid var(--line);border-radius:14px;padding:13px;cursor:pointer}.match.active{border:2px solid var(--blue);background:#f7f9ff}.match b{font-size:11px;display:block}.match span{font-size:9px;color:var(--muted)}.placements{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:15px}.placement{border:1px solid var(--line);border-radius:14px;padding:13px;cursor:pointer}.placement.active{border:2px solid var(--violet);background:#faf8ff}.placement b{font-size:11px;display:block}.placement strong{font:700 21px Space Grotesk;display:block;margin-top:5px}.placement span{font-size:9px;color:var(--muted)}.field{margin-top:11px}.field label{display:block;font-size:9px;font-weight:800;margin-bottom:5px}.field input{width:100%;border:1px solid var(--line);border-radius:11px;padding:11px}.btn{width:100%;border:0;border-radius:12px;padding:13px;background:#151b22;color:#fff;font-size:11px;font-weight:800;margin-top:12px;cursor:pointer}.preview{position:sticky;top:18px}.phone{width:min(350px,100%);margin:auto;border:6px solid #151515;border-radius:42px;padding:7px;background:#151515}.screen{min-height:570px;background:#f2f4f7;border-radius:31px;overflow:hidden}.wahead{background:#fff;padding:22px 13px 11px;display:flex;gap:9px;align-items:center}.crest{width:39px;height:39px;border-radius:50%;background:var(--yellow);border:2px solid var(--fco);display:grid;place-items:center;font-size:9px;font-weight:900;color:var(--fco)}.wahead b{font-size:12px;display:block}.wahead span{font-size:8px;color:var(--muted)}.feed{padding:9px}.post{background:#fff;border-radius:11px;padding:5px}.art{height:280px;border-radius:8px;background:linear-gradient(145deg,#083b77,#0f5a99);color:#fff;display:grid;place-items:center;text-align:center;position:relative;padding:20px}.art .type{color:var(--yellow);font-size:11px;font-weight:900;letter-spacing:.13em}.art h3{font:700 28px Space Grotesk;margin:11px 0 3px}.sponsor{position:absolute;left:12px;right:12px;bottom:12px;background:#fff;border-radius:9px;color:#16202a;padding:9px;text-align:left}.sponsor b{font-size:9px;display:block}.sponsor span{font-size:8px;color:var(--muted)}.copy{font-size:9px;line-height:1.5;padding:9px}.summary{margin-top:15px;border-top:1px solid var(--line);padding-top:13px}.row{display:flex;justify-content:space-between;font-size:10px;padding:5px 0}.row.total{font-size:15px;font-weight:900;border-top:1px solid var(--line);margin-top:6px;padding-top:11px}.approval{background:#fff9e9;border:1px solid #fedf89;border-radius:11px;padding:10px;margin-top:10px;font-size:9px;color:#7a2e0e}.success{background:#ecfdf5;border:1px solid #abefc6;color:#05603a;border-radius:11px;padding:11px;margin-top:10px;font-size:10px}.login{position:fixed;inset:0;background:#ffffffef;backdrop-filter:blur(10px);z-index:50;display:grid;place-items:center;padding:20px}.loginbox{width:min(430px,94vw);border:1px solid var(--line);border-radius:25px;padding:28px;background:#fff;box-shadow:0 25px 80px #10203018}.loginbox h2{font:700 31px Space Grotesk;margin:10px 0 7px}.loginbox p{font-size:11px;color:var(--muted)}.loginbox input{width:100%;border:1px solid var(--line);border-radius:11px;padding:11px;margin:5px 0}
+.layout{display:grid;grid-template-columns:1.08fr .92fr;gap:16px;margin-top:16px}.card{border:1px solid var(--line);border-radius:22px;background:#fff;overflow:hidden}.head{padding:20px 22px;border-bottom:1px solid var(--line)}.head h2{font:700 22px Space Grotesk;margin:4px 0 0}.body{padding:18px}.calendar{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff}.cal-head{display:flex;align-items:center;justify-content:space-between;padding:13px 14px;border-bottom:1px solid var(--line);background:var(--soft)}.cal-head b{font:700 15px Space Grotesk}.cal-nav{display:flex;gap:6px}.cal-nav button{width:30px;height:30px;border:1px solid var(--line);background:#fff;border-radius:9px;font-weight:900;cursor:pointer}.weekdays,.cal-grid{display:grid;grid-template-columns:repeat(7,1fr)}.weekdays div{padding:8px 4px;text-align:center;font-size:8px;font-weight:800;color:#8a95a0;border-bottom:1px solid var(--line)}.day{min-height:92px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:7px;position:relative;background:#fff}.day:nth-child(7n){border-right:0}.day.other{background:#fafbfc;color:#b3bbc4}.daynum{font-size:9px;font-weight:800;color:#778390}.game-pill{margin-top:6px;border:1px solid #cfd8e5;background:#f7f9ff;border-radius:8px;padding:6px;cursor:pointer;transition:.14s}.game-pill:hover{border-color:var(--blue);transform:translateY(-1px)}.game-pill.active{background:#eef2ff;border:2px solid var(--blue)}.game-pill b{display:block;font-size:8px;line-height:1.25}.game-pill span{display:block;font-size:7px;color:var(--muted);margin-top:2px}.selected-match{margin-top:10px;border:1px solid var(--line);border-radius:13px;padding:11px;background:#fbfcff}.selected-match small{display:block;font-size:8px;color:var(--muted);text-transform:uppercase;font-weight:800;letter-spacing:.08em}.selected-match b{display:block;font-size:11px;margin-top:3px}.selected-match span{font-size:9px;color:var(--muted)}.placements{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:15px}.placement{border:1px solid var(--line);border-radius:14px;padding:13px;cursor:pointer}.placement.active{border:2px solid var(--violet);background:#faf8ff}.placement b{font-size:11px;display:block}.placement strong{font:700 21px Space Grotesk;display:block;margin-top:5px}.placement span{font-size:9px;color:var(--muted)}.field{margin-top:11px}.field label{display:block;font-size:9px;font-weight:800;margin-bottom:5px}.field input{width:100%;border:1px solid var(--line);border-radius:11px;padding:11px}.btn{width:100%;border:0;border-radius:12px;padding:13px;background:#151b22;color:#fff;font-size:11px;font-weight:800;margin-top:12px;cursor:pointer}.preview{position:sticky;top:18px}.phone{width:min(350px,100%);margin:auto;border:6px solid #151515;border-radius:42px;padding:7px;background:#151515}.screen{min-height:570px;background:#f2f4f7;border-radius:31px;overflow:hidden}.wahead{background:#fff;padding:22px 13px 11px;display:flex;gap:9px;align-items:center}.crest{width:39px;height:39px;border-radius:50%;background:var(--yellow);border:2px solid var(--fco);display:grid;place-items:center;font-size:9px;font-weight:900;color:var(--fco)}.wahead b{font-size:12px;display:block}.wahead span{font-size:8px;color:var(--muted)}.feed{padding:9px}.post{background:#fff;border-radius:11px;padding:5px}.art{height:280px;border-radius:8px;background:linear-gradient(145deg,#083b77,#0f5a99);color:#fff;display:grid;place-items:center;text-align:center;position:relative;padding:20px}.art .type{color:var(--yellow);font-size:11px;font-weight:900;letter-spacing:.13em}.art h3{font:700 28px Space Grotesk;margin:11px 0 3px}.sponsor{position:absolute;left:12px;right:12px;bottom:12px;background:#fff;border-radius:9px;color:#16202a;padding:9px;text-align:left}.sponsor b{font-size:9px;display:block}.sponsor span{font-size:8px;color:var(--muted)}.copy{font-size:9px;line-height:1.5;padding:9px}.summary{margin-top:15px;border-top:1px solid var(--line);padding-top:13px}.row{display:flex;justify-content:space-between;font-size:10px;padding:5px 0}.row.total{font-size:15px;font-weight:900;border-top:1px solid var(--line);margin-top:6px;padding-top:11px}.approval{background:#fff9e9;border:1px solid #fedf89;border-radius:11px;padding:10px;margin-top:10px;font-size:9px;color:#7a2e0e}.success{background:#ecfdf5;border:1px solid #abefc6;color:#05603a;border-radius:11px;padding:11px;margin-top:10px;font-size:10px}.login{position:fixed;inset:0;background:#ffffffef;backdrop-filter:blur(10px);z-index:50;display:grid;place-items:center;padding:20px}.loginbox{width:min(430px,94vw);border:1px solid var(--line);border-radius:25px;padding:28px;background:#fff;box-shadow:0 25px 80px #10203018}.loginbox h2{font:700 31px Space Grotesk;margin:10px 0 7px}.loginbox p{font-size:11px;color:var(--muted)}.loginbox input{width:100%;border:1px solid var(--line);border-radius:11px;padding:11px;margin:5px 0}
 @media(max-width:900px){.layout{grid-template-columns:1fr}.preview{position:static}}@media(max-width:600px){.placements{grid-template-columns:1fr}.shell{width:95vw}.hero{padding:30px 24px}}
 </style>
 </head>
@@ -400,9 +400,14 @@ SPONSOR_HTML = """<!doctype html>
 
   <section class="layout">
     <div class="card">
-      <div class="head"><div class="eyebrow">1 · SPIEL</div><h2>Wo willst du sichtbar sein?</h2></div>
+      <div class="head"><div class="eyebrow">1 · SPIELKALENDER</div><h2>Wähle dein Spiel im Kalender.</h2></div>
       <div class="body">
-        <div class="matches" id="matches"></div>
+        <div class="calendar">
+          <div class="cal-head"><div class="cal-nav"><button onclick="moveMonth(-1)" aria-label="Vorheriger Monat">‹</button><button onclick="moveMonth(1)" aria-label="Nächster Monat">›</button></div><b id="monthLabel">Monat</b><span style="font-size:8px;color:var(--muted)">Spiel anklicken</span></div>
+          <div class="weekdays"><div>MO</div><div>DI</div><div>MI</div><div>DO</div><div>FR</div><div>SA</div><div>SO</div></div>
+          <div class="cal-grid" id="calendarGrid"></div>
+        </div>
+        <div class="selected-match" id="selectedMatch"><small>Ausgewähltes Spiel</small><b>Noch kein Spiel gewählt</b><span>Wähle ein Spiel direkt im Kalender.</span></div>
         <div style="margin-top:18px" class="eyebrow">2 · PLACEMENT</div>
         <div class="placements">
           <div class="placement active" data-name="Matchday" data-price="25" onclick="choosePlacement(this)"><b>Matchday</b><strong>CHF 25</strong><span>Vor dem Spiel</span></div>
@@ -429,13 +434,54 @@ SPONSOR_HTML = """<!doctype html>
   </section>
 </main>
 <script>
-let matchId=null, placement='Matchday', price=25, matchData=null;
+let matchId=null, placement='Matchday', price=25, matchData=null, allMatches=[], currentMonth=null;
+const monthNames=['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+
 async function loadMatches(){
- const r=await fetch('/api/matches');const rows=await r.json();const el=document.getElementById('matches');
- el.innerHTML=rows.map((m,i)=>`<div class="match ${i===1?'active':''}" data-id="${m.id}" onclick='chooseMatch(this,${JSON.stringify(m).replace(/'/g,"&apos;")})'><b>${m.team} · FC Oberwinterthur vs ${m.opponent}</b><span>${m.kickoff} · ${m.venue} · ${m.competition}</span></div>`).join('');
- matchData=rows[1]||rows[0];matchId=matchData.id;refresh();
+ const r=await fetch('/api/matches');allMatches=await r.json();
+ matchData=allMatches[1]||allMatches[0]||null;
+ if(matchData){
+   matchId=matchData.id;
+   const d=new Date(matchData.kickoff.replace(' ','T'));
+   currentMonth=new Date(d.getFullYear(),d.getMonth(),1);
+ }else{
+   const d=new Date(); currentMonth=new Date(d.getFullYear(),d.getMonth(),1);
+ }
+ renderCalendar(); refresh();
 }
-function chooseMatch(el,m){document.querySelectorAll('.match').forEach(x=>x.classList.remove('active'));el.classList.add('active');matchData=m;matchId=m.id;refresh()}
+function moveMonth(delta){currentMonth=new Date(currentMonth.getFullYear(),currentMonth.getMonth()+delta,1);renderCalendar()}
+function sameDay(a,b){return a.getFullYear()===b.getFullYear()&&a.getMonth()===b.getMonth()&&a.getDate()===b.getDate()}
+function renderCalendar(){
+ const y=currentMonth.getFullYear(),m=currentMonth.getMonth();
+ document.getElementById('monthLabel').textContent=monthNames[m]+' '+y;
+ const first=new Date(y,m,1), offset=(first.getDay()+6)%7;
+ const start=new Date(y,m,1-offset);
+ let html='';
+ for(let i=0;i<42;i++){
+   const d=new Date(start);d.setDate(start.getDate()+i);
+   const dayMatches=allMatches.filter(x=>sameDay(new Date(x.kickoff.replace(' ','T')),d));
+   html+=`<div class="day ${d.getMonth()!==m?'other':''}"><div class="daynum">${d.getDate()}</div>`;
+   for(const gm of dayMatches){
+     const active=gm.id===matchId?'active':'';
+     html+=`<div class="game-pill ${active}" data-id="${gm.id}" onclick="chooseMatchById(${gm.id})"><b>${gm.team}</b><span>${gm.kickoff.slice(11,16)} · vs ${gm.opponent}</span></div>`;
+   }
+   html+='</div>';
+ }
+ document.getElementById('calendarGrid').innerHTML=html;
+ updateSelectedMatch();
+}
+function chooseMatchById(id){
+ matchData=allMatches.find(x=>x.id===id); if(!matchData)return;
+ matchId=id;
+ const d=new Date(matchData.kickoff.replace(' ','T'));
+ currentMonth=new Date(d.getFullYear(),d.getMonth(),1);
+ renderCalendar(); refresh();
+}
+function updateSelectedMatch(){
+ const el=document.getElementById('selectedMatch');
+ if(!matchData){el.innerHTML='<small>Ausgewähltes Spiel</small><b>Noch kein Spiel gewählt</b><span>Wähle ein Spiel direkt im Kalender.</span>';return;}
+ el.innerHTML=`<small>Ausgewähltes Spiel</small><b>${matchData.team} · FC Oberwinterthur vs ${matchData.opponent}</b><span>${matchData.kickoff} · ${matchData.venue} · ${matchData.competition}</span>`;
+}
 function choosePlacement(el){document.querySelectorAll('.placement').forEach(x=>x.classList.remove('active'));el.classList.add('active');placement=el.dataset.name;price=+el.dataset.price;refresh()}
 function money(v){return 'CHF '+Number(v).toFixed(2)}
 function refresh(){
