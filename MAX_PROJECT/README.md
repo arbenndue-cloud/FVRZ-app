@@ -26,3 +26,6 @@ MAX ist nicht nur Software. MAX arbeitet für den Verein:
 - Sponsoreninventar erzeugen und verkaufen
 - Sponsoren vom Club freigeben lassen
 - Resultate messen und daraus lernen
+
+## MVP-Match-Journey — 08.10.2026
+Matchday (optional mit bestätigter Aufstellung) → Fulltime → Player of the Day. Genau drei Matchkarten und maximal drei Standard-Sponsoringplätze pro Spiel; gilt kanalübergreifend. Keine separate Anpfiff- oder Halbzeitkarte.

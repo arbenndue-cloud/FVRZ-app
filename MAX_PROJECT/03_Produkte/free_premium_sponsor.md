@@ -27,8 +27,7 @@ Das Premium-Abo soll primär Tool-, AI- und Workspace-Kosten decken und gleichze
 ## Sponsor Marketplace
 Standardisierte Placements pro Spiel:
 - Matchday — CHF 25
-- Kickoff — CHF 20
-- Full Time — CHF 30
+- Fulltime — CHF 30
 - Player of the Day — CHF 35
 
 Neuer Sponsor:

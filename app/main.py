@@ -31,8 +31,7 @@ FIXTURES = [
 
 PLACEMENTS = {
     "Matchday": 25,
-    "Kickoff": 20,
-    "Full Time": 30,
+    "Fulltime": 30,
     "Player of the Day": 35,
 }
 
@@ -280,7 +279,7 @@ def autopilot_plan(request: AutopilotRequest):
     weeks = {}
     for m in matches:
         week = date.fromisoformat(m['kickoff'][:10]).isocalendar()[:2]
-        for placement, price in [("Matchday",25),("Full Time",30)]:
+        for placement, price in PLACEMENTS.items():
             if weeks.get(week,0) >= request.frequency_cap or price > remaining:
                 continue
             slots.append({"match_id":m['id'], "team":m['team'], "opponent":m['opponent'], "kickoff":m['kickoff'], "placement":placement, "price":price})

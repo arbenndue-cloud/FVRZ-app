@@ -24,7 +24,7 @@ MAX kann einen Verein mit vielen Teams in ein relevantes lokales Sportmedium ver
 
 ### Phase C — Monetarisierung
 - fitality als kontrollierter Testsponsor
-- vier standardisierte Placements
+- drei standardisierte Placements: Matchday (optional mit Aufstellung), Fulltime, Player of the Day
 - Sponsor-Freigabe
 - View/Share/Click Reporting
 - später Marketplace

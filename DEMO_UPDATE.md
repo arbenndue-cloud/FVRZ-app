@@ -5,13 +5,13 @@ This update replaces the FC Oberwinterthur demo identity with **FC Mockup** and 
 ## Experiences
 
 - `max-site/index.html`: public MAX concept, responsive process graphic, simple club/sponsor journeys, free club model, all three portal links.
-- `/club`: forward-looking editorial examples, original four-card Mockup series, sponsor and player-moment reviews, free club-post drafts.
+- `/club`: forward-looking editorial examples, three-card Mockup series, sponsor and player-moment reviews, free club-post drafts.
 - `/sponsor`: Autopilot first; large monthly calendar second; editable placement preview, original logo upload and enquiry form below.
 - `/player`: fictional player profile, original cards for download, channel sharing, text-moment submission with consent confirmation and club review.
 
 ## Graphics
 
-The four original FC MAX Mockup/fitality cards supplied in the project are reused unchanged. The dynamic sponsor layout follows their white/navy/blue direction and uses the matchday art as a backdrop. It accepts an original logo locally; no replacement fitality logo is generated. Static reference cards keep their original embedded names, scores and sponsor. The editor clearly distinguishes them from editable previews.
+The three selected original FC MAX Mockup/fitality cards supplied in the project are reused unchanged. The dynamic sponsor layout follows their white/navy/blue direction and uses the matchday art as a backdrop. It accepts an original logo locally; no replacement fitality logo is generated. Static reference cards keep their original embedded names, scores and sponsor. The editor clearly distinguishes them from editable previews.
 
 ## What works
 
@@ -36,3 +36,7 @@ Run `python -m unittest test_demo -v` after installing requirements and `httpx`.
 The tests cover budget and frequency caps, invalid ranges, empty inventory, sponsor credit and approval, player consent and review, idempotent fixture seeding, portal and asset responses.
 
 Existing fixture migration only replaces rows matching the old bundled venue names and preserves their IDs so campaign references remain intact. Other historical rows are retained.
+
+## MVP match journey — 8 October 2026
+
+Exactly three match formats: **Matchday** (optional confirmed lineup), **Fulltime** (confirmed final result), and **Player of the Day** (club-confirmed selection). Applies to all channels, portals, sponsor inventory, Autopilot and forecasts. No separate kickoff or halftime card. At most three standard sponsorship placements per match; channel variants are not additional match slots. Missing data or selection must never be invented.
